@@ -43,14 +43,6 @@ class _TodoScreenState extends State<TodoScreen> {
   static const Color _textDark = Color(0xFF2D2D2D);
   static const Color _textGrey = Color(0xFF9A9A9A);
 
-  // Warna aksen di sisi kiri kartu (bergantian)
-  static const List<Color> _accentColors = [
-    Color(0xFFF28B82), // merah
-    Color(0xFFF6C177), // kuning
-    Color(0xFFA8C99A), // hijau
-    Color(0xFF9FA8C7), // biru keabu-abuan
-  ];
-
   void _addTodo() {
     final text = _controller.text.trim();
     if (text.isEmpty) {
@@ -214,7 +206,6 @@ class _TodoScreenState extends State<TodoScreen> {
       separatorBuilder: (_, __) => const SizedBox(height: 12),
       itemBuilder: (context, index) {
         final todo = _todos[index];
-        final accent = _accentColors[index % _accentColors.length];
 
         return Dismissible(
           key: ObjectKey(todo),
@@ -228,14 +219,14 @@ class _TodoScreenState extends State<TodoScreen> {
           ),
           child: GestureDetector(
             onTap: () => _toggleDone(index),
-            child: _buildCard(todo, index, accent),
+            child: _buildCard(todo, index),
           ),
         );
       },
     );
   }
 
-  Widget _buildCard(TodoItem todo, int index, Color accent) {
+  Widget _buildCard(TodoItem todo, int index) {
     return Container(
       decoration: const BoxDecoration(
         color: Colors.white,
@@ -251,24 +242,17 @@ class _TodoScreenState extends State<TodoScreen> {
         child: IntrinsicHeight(
           child: Row(
             children: [
-              // garis aksen di kiri
-              Container(width: 6, color: accent),
-              const SizedBox(width: 14),
+              const SizedBox(width: 20),
               // nomor urut 1, 2, 3, ...
-              Container(
-                width: 36,
-                height: 36,
-                alignment: Alignment.center,
-                color: accent.withOpacity(0.25),
-                child: Text(
-                  '${index + 1}',
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w700,
-                    color: _textDark,
-                  ),
+              Text(
+                '${index + 1}.',
+                style: const TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w700,
+                  color: _textDark,
                 ),
               ),
-              const SizedBox(width: 14),
+              const SizedBox(width: 12),
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 18),
