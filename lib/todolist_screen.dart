@@ -243,9 +243,8 @@ class _TodoScreenState extends State<TodoScreen> {
           child: Row(
             children: [
               const SizedBox(width: 20),
-              // nomor urut 1, 2, 3, ...
               Text(
-                '${index + 1}.',
+                '${index + 1}',
                 style: const TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.w700,
